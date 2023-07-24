@@ -103,7 +103,7 @@ int add_buffer(char *buffer, char *str_to_add)
 {
 	int length, i;
 
-	length = strnlen (buffer);
+	length = str_length (buffer);
 	for (i = 0; str_to_add[i]; i++)
 	{
 		buffer[length + i] = str_to_add[i];
