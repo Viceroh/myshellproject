@@ -1,57 +1,72 @@
 #include "shell.h"
 
 /**
- * recurrent_data - free the fields needed each loop
- * @data: struct of the program's data
- * Return: Nothing
+ * _print - writes a array of chars in the standard output
+ * @string: pointer to the array of chars
+ * Return: the number of bytes writed or .
+ * On error, -1 is returned, and errno is set appropriately.
  */
-void recurrent_data(data_of_program *data)
+int _print(char *string)
 {
-	if (data->tokens)
-		free_pointers(data->tokens);
-	if (data->input_line)
-		free(data->input_line);
-	if (data->command_name)
-		free(data->command_name);
-
-	data->input_line = NULL;
-	data->command_name = NULL;
-	data->tokens = NULL;
+	return (write(STDOUT_FILENO, string, str_length(string)));
+}
+/**
+ * _prints - writes a array of chars in the standar error
+ * @string: pointer to the array of chars
+ * Return: the number of bytes writed or .
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _prints(char *string)
+{
+	return (write(STDERR_FILENO, string, str_length(string)));
 }
 
 /**
- * free_data - free all field of the data
- * @data: struct of the program's data
- * Return: Nothing
+ * _print_error_string - writes a array of chars in the standard error
+ * @data: a pointer to the program's data'
+ * @errorcode: error code to print
+ * Return: the number of bytes writed or .
+ * On error, -1 is returned, and errno is set appropriately.
  */
-void free_data(data_of_program *data)
+int _print_error_string(int errorcode, data_of_program *data)
 {
-	if (data->file_descriptor != 0)
+	char n_as_string[10] = {'\0'};
+
+	number_to_string((long) data->exec_counter, n_as_string, 10);
+
+	if (errorcode == 2 || errorcode == 3)
 	{
-		if (close(data->file_descriptor))
-			perror(data->program_name);
+		_prints(data->program_name);
+		_prints(": ");
+		_prints(n_as_string);
+		_prints(": ");
+		_prints(data->tokens[0]);
+		if (errorcode == 2)
+			_prints(": Illegal number: ");
+		else
+			_prints(": can't cd to ");
+		_prints(data->tokens[1]);
+		_prints("\n");
 	}
-	recurrent_data(data);
-	free_pointers(data->env);
-	free_pointers(data->alias_list);
+	else if (errorcode == 127)
+	{
+		_prints(data->program_name);
+		_prints(": ");
+		_prints(n_as_string);
+		_prints(": ");
+		_prints(data->command_name);
+		_prints(": not found\n");
+	}
+	else if (errorcode == 126)
+	{
+		_prints(data->program_name);
+		_prints(": ");
+		_prints(n_as_string);
+		_prints(": ");
+		_prints(data->command_name);
+		_prints(": Permission denied\n");
+	}
+	return (0);
 }
 
-/**
- * free_pointers - frees each pointer of an array of pointers and the
- * array too
- * @array: array of pointers
- * Return: nothing
- */
-void free_pointers(char **array)
-{
-	int i;
 
-	if (array != NULL)
-	{
-		for (i = 0; array[i]; i++)
-			free(array[i]);
-
-		free(array);
-		array = NULL;
-	}
-}

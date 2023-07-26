@@ -94,3 +94,4 @@ int check_logics(char *array_commands[], int i, char array_operators[])
 	}
 	return (i);
 }
+
