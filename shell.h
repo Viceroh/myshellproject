@@ -69,7 +69,7 @@ void gidi(char *prompt, data_of_program *data);
 void handle_ctrl_c(int opr UNUSED);
 
 
-/*========  getlines.c  ========*/
+/*========  Getlines.c  ========*/
 
 /* Read one line of the standar input*/
 int Getlines(data_of_program *data);
@@ -90,7 +90,7 @@ void expand_alias(data_of_program *data);
 int add_buffer(char *buffer, char *str_to_add);
 
 
-/*======== string_token.c ========*/
+/*======== str_tok.c ========*/
 
 /* Separate the string in tokens using a designed delimiter */
 void tokenize(data_of_program *data);
@@ -111,7 +111,7 @@ int execute(data_of_program *data);
 int builtins_list(data_of_program *data);
 
 
-/*======== find__path.c ========*/
+/*======== find_path.c ========*/
 
 /* Creates an array of the path directories */
 char **tokenize_path(data_of_program *data);
@@ -123,7 +123,7 @@ int find_programs(data_of_program *data);
 /************** HELPERS FOR MEMORY MANAGEMENT **************/
 
 
-/*======== helper.c ========*/
+/*======== helpers_free.c ========*/
 
 /* Frees the memory for directories */
 void free_pointers(char **directories);
@@ -138,7 +138,7 @@ void free_data(data_of_program *data);
 /************** BUILTINS **************/
 
 
-/*======== more_builtin.c ========*/
+/*======== builtins_more.c ========*/
 
 /* Close the shell */
 int builtin_exit(data_of_program *data);
@@ -156,7 +156,7 @@ int builtin_help(data_of_program *data);
 int builtin_alias(data_of_program *data);
 
 
-/*======== Builtin_env.c ========*/
+/*======== builtins_env.c ========*/
 
 /* Shows the environment where the shell runs */
 int Builtin_env(data_of_program *data);
@@ -171,7 +171,7 @@ int builtin_unset_env(data_of_program *data);
 /************** HELPERS FOR ENVIRONMENT VARIABLES MANAGEMENT **************/
 
 
-/*======== env_mng.c ========*/
+/*======== env_management.c ========*/
 
 /* Gets the value of an environment variable */
 char *env_get_keys(char *name, data_of_program *data);
@@ -189,7 +189,7 @@ void print_environ(data_of_program *data);
 /************** HELPERS FOR PRINTING **************/
 
 
-/*======== helper_prints.c ========*/
+/*======== helpers_print.c ========*/
 
 /* Prints a string in the standar output */
 int _print(char *string);
@@ -204,7 +204,7 @@ int _print_error_string(int errorcode, data_of_program *data);
 /************** HELPERS FOR STRINGS MANAGEMENT **************/
 
 
-/*======== helper__string ========*/
+/*======== helpers_string ========*/
 
 /* Counts the number of characters of a string */
 int str_length(char *string);
@@ -222,7 +222,7 @@ char *str_concat(char *string1, char *string2);
 void str_reverse(char *string);
 
 
-/*======== numbers.c ========*/
+/*======== helpers_numbers.c ========*/
 
 /* Cast from int to string */
 void number_to_string(long number, char *string, int base);
@@ -247,3 +247,4 @@ int set_alias(char *alias_string, data_of_program *data);
 
 
 #endif /* SHELL_H */
+
