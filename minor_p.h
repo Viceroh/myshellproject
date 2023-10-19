@@ -29,7 +29,7 @@
 #define HELP_ENV_MSG "env=\n"\
 "env:\tenv \n\n"\
 "	Print environment.\n\n"\
-"	The env command will be print a complete list of enviroment variables.\n\n"
+"	The env command will be print a complete list of enviroment_variables.\n\n"
 
 #define HELP_SETENV_MSG "setenv=\n"\
 "setenv:\tsetenv VARIABLE VALUE\n\n"\
